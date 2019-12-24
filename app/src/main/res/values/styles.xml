@@ -9,4 +9,8 @@
         <item name="colorOnPrimary">@color/color_white</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="AppTheme" >
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>
