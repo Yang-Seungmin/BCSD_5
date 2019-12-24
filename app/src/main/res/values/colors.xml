@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="bcsd_color_purple">#795cf2</color>
+    <color name="bcsd_color_purple_light">#af8aff</color>
+    <color name="bcsd_color_purple_dark">#3f30be</color>
+
+    <color name="color_orange_500">#ff9800</color>
+
+    <color name="color_white">#ffffff</color>
+
 </resources>
