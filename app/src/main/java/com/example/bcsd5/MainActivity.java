@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.example.bcsd5.board.AddPostActivity;
 import com.example.bcsd5.board.BoardFragment;
+import com.example.bcsd5.board.BoardItemData;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,7 +89,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQ_ADD_POST) {
-
+            if(resultCode == AddPostActivity.RESULT_SUCCESSFUL && data != null && data.getExtras() != null)
+                boardFragment.getBoardController().addBoardItem(new BoardItemData(
+                        data.getExtras().getString("title"),
+                        data.getExtras().getString("author"),
+                        data.getExtras().getLong("time")
+                ));
         }
     }
 

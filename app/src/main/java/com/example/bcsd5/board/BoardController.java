@@ -41,7 +41,7 @@ public class BoardController {
     }
 
     public void updateView() {
-        boardRecyclerViewAdapter.notifyDataSetChanged();
+        boardRecyclerViewAdapter.updateData();
     }
 
     public void addBoardItem(BoardItemData boardItemData) {

@@ -54,4 +54,8 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
             desc = itemView.findViewById(R.id.item_text_view_desc);
         }
     }
+
+    public void updateData() {
+        notifyDataSetChanged();
+    }
 }

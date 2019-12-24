@@ -15,8 +15,8 @@ import com.example.bcsd5.R;
 
 public class BoardFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    BoardController boardController;
+    private RecyclerView recyclerView;
+    private BoardController boardController;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -40,5 +40,9 @@ public class BoardFragment extends Fragment {
     private void init(View view) {
         recyclerView = view.findViewById(R.id.board_recycler_view);
         boardController = new BoardController(getActivity(), recyclerView);
+    }
+
+    public BoardController getBoardController() {
+        return boardController;
     }
 }
