@@ -33,8 +33,6 @@ public class BoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init(view);
-
-        boardController.addBoardItem(new BoardItemData("홀리 쉣", "아무개", System.currentTimeMillis()));
     }
 
     private void init(View view) {

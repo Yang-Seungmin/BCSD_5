@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         webViewFragment = new WebViewFragment();
 
         fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.drawer_container, webViewFragment);
+        fragmentTransaction.add(R.id.drawer_container, calcFragment);
+        fragmentTransaction.add(R.id.drawer_container, boardFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -103,13 +108,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction = fragmentManager.beginTransaction();
         switch (item.getItemId()) {
             case R.id.item_board:
-                fragmentTransaction.replace(R.id.drawer_container, boardFragment);
+                fragmentTransaction.show(boardFragment);
+                fragmentTransaction.hide(calcFragment);
+                fragmentTransaction.hide(webViewFragment);
                 break;
             case R.id.item_calc:
-                fragmentTransaction.replace(R.id.drawer_container, calcFragment);
+                fragmentTransaction.hide(boardFragment);
+                fragmentTransaction.show(calcFragment);
+                fragmentTransaction.hide(webViewFragment);
                 break;
             case R.id.item_web:
-                fragmentTransaction.replace(R.id.drawer_container, webViewFragment);
+                fragmentTransaction.hide(boardFragment);
+                fragmentTransaction.hide(calcFragment);
+                fragmentTransaction.show(webViewFragment);
                 break;
         }
         fragmentTransaction.commit();
