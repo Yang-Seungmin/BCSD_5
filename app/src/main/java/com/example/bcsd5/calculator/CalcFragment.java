@@ -155,14 +155,11 @@ public class CalcFragment extends Fragment implements View.OnClickListener {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_calc_load, null);
         ((TextView) view.findViewById(R.id.text_view_calc_load_result)).setText(result);
         ((TextView) view.findViewById(R.id.text_view_calc_load_expr)).setText(expr);
-        if (alertDialog == null)
-            alertDialog = new AlertDialog.Builder(getActivity())
-                    .setView(view)
-                    .setTitle("저장된 계산 결과")
-                    .setPositiveButton("확인", null)
-                    .create();
-
-        alertDialog.show();
+        new AlertDialog.Builder(getActivity())
+                .setView(view)
+                .setTitle("저장된 계산 결과")
+                .setPositiveButton("확인", null)
+                .show();
     }
 
     public boolean isSaved() {
