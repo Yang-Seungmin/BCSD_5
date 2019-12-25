@@ -5,8 +5,8 @@ import java.util.Stack;
 
 public class Calculator {
     private static final String errorMessage = "잘못된 수식";
-    String expr;
-    ArrayList<String> arrayList;
+    private String expr, resultStr = null;
+    private ArrayList<String> arrayList;
 
     public Calculator(String expr) {
         this.expr = expr;
@@ -25,7 +25,7 @@ public class Calculator {
         for (char e : exprChar) {
             switch (e) {
                 case '-':
-                    if(prev == '+' || prev == '-' || prev == '*' || prev == '/' || prev == '(' || prev == ' ') {
+                    if (prev == '+' || prev == '-' || prev == '*' || prev == '/' || prev == '(' || prev == ' ') {
                         arrayList.add("0");
                     }
                 case '+':
@@ -59,37 +59,37 @@ public class Calculator {
                 double b, a;
                 switch (s) {
                     case "+":
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         b = Double.parseDouble(stringStack.pop());
 
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         a = Double.parseDouble(stringStack.pop());
 
                         stringStack.push(String.valueOf(a + b));
                         break;
                     case "-":
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         b = Double.parseDouble(stringStack.pop());
 
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         a = Double.parseDouble(stringStack.pop());
 
                         stringStack.push(String.valueOf(a - b));
                         break;
                     case "*":
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         b = Double.parseDouble(stringStack.pop());
 
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         a = Double.parseDouble(stringStack.pop());
 
                         stringStack.push(String.valueOf(a * b));
                         break;
                     case "/":
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         b = Double.parseDouble(stringStack.pop());
 
-                        if (stringStack.empty()) return errorMessage;
+                        if (stringStack.empty()) resultStr = errorMessage;
                         a = Double.parseDouble(stringStack.pop());
 
                         stringStack.push(String.valueOf(a / b));
@@ -106,9 +106,11 @@ public class Calculator {
                 stringStack.push(String.valueOf(a * b));
             }
 
-            if (stringStack.empty()) return errorMessage;
-            return stringStack.pop();
-        } else return "ERROR";
+            if (stringStack.empty()) resultStr = errorMessage;
+            resultStr = stringStack.pop();
+        } else resultStr = "ERROR";
+
+        return resultStr;
     }
 
     private ArrayList<String> convertPostExpr() {
@@ -174,6 +176,14 @@ public class Calculator {
         }
 
         return stackBraces.empty();
+    }
+
+    public String getExpr() {
+        return expr;
+    }
+
+    public String getResultStr() {
+        return resultStr;
     }
 
     public ArrayList<String> getArrayList() {
