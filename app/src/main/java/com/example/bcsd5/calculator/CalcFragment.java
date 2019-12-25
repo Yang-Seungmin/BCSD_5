@@ -9,12 +9,17 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.bcsd5.MainActivity;
 import com.example.bcsd5.R;
 import com.example.bcsd5.calculator.Calculator;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CalcFragment extends Fragment implements View.OnClickListener {
 
-    EditText editText;
+    private EditText editText;
+    private String expr, result;
+    private Calculator calculator = null;
 
     public CalcFragment() {
         // Required empty public constructor
@@ -92,7 +97,7 @@ public class CalcFragment extends Fragment implements View.OnClickListener {
                 editText.setText("");
                 break;
             case R.id.button_equal:
-                Calculator calculator = new Calculator(editText.getText().toString());
+                calculator = new Calculator(editText.getText().toString());
                 editText.setText(calculator.calculate());
                 break;
             case R.id.button_opening_brace:
@@ -116,5 +121,22 @@ public class CalcFragment extends Fragment implements View.OnClickListener {
                         ((Button) v).getText());
                 break;
         }
+    }
+
+    public void save() {
+        if(editText.getText().toString().length() <= 0)
+            Snackbar.make(getActivity().getWindow().getDecorView(),
+                    "수식이 입력되지 않았습니다.",
+                    BaseTransientBottomBar.LENGTH_SHORT).show();
+        if(calculator == null) calculator = new Calculator(editText.getText().toString());
+
+        expr = calculator.getExpr();
+        result = calculator.getResultStr();
+
+        ((MainActivity)getActivity()).getMenu().findItem(R.id.item_load_calc).setVisible(true);
+    }
+
+    public void load() {
+
     }
 }
