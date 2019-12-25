@@ -96,6 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(MainActivity.this, AddPostActivity.class);
                 startActivityForResult(intent, REQ_ADD_POST);
                 break;
+            case R.id.item_save_calc:
+                ((CalcFragment) fragments[FRAGMENT_CALC]).save();
+                break;
+            case R.id.item_load_calc:
+                ((CalcFragment) fragments[FRAGMENT_CALC]).load();
+                break;
         }
         return true;
     }
@@ -138,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item_calc:
                 fragmentTransaction.show(fragments[FRAGMENT_CALC]);
                 showMenuItem(R.id.item_save_calc);
+                if(((CalcFragment) fragments[FRAGMENT_CALC]).isSaved())
+                    showMenuItem(R.id.item_load_calc);
                 break;
             case R.id.item_web:
                 fragmentTransaction.show(fragments[FRAGMENT_WEBVIEW]);
