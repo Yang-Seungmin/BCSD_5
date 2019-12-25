@@ -1,11 +1,13 @@
 package com.example.bcsd5.calculator;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,11 +17,15 @@ import com.example.bcsd5.calculator.Calculator;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.zip.Inflater;
+
 public class CalcFragment extends Fragment implements View.OnClickListener {
 
     private EditText editText;
     private String expr, result;
     private Calculator calculator = null;
+
+    private AlertDialog alertDialog;
 
     public CalcFragment() {
         // Required empty public constructor
@@ -124,19 +130,42 @@ public class CalcFragment extends Fragment implements View.OnClickListener {
     }
 
     public void save() {
-        if(editText.getText().toString().length() <= 0)
+        if (editText.getText().toString().length() <= 0) {
             Snackbar.make(getActivity().getWindow().getDecorView(),
                     "수식이 입력되지 않았습니다.",
                     BaseTransientBottomBar.LENGTH_SHORT).show();
-        if(calculator == null) calculator = new Calculator(editText.getText().toString());
+            return;
+        }
+        if (calculator == null) calculator = new Calculator(editText.getText().toString());
+        calculator.calculate();
 
         expr = calculator.getExpr();
         result = calculator.getResultStr();
 
-        ((MainActivity)getActivity()).getMenu().findItem(R.id.item_load_calc).setVisible(true);
+        if (((MainActivity) getActivity()).getMenu() != null &&
+                !((MainActivity) getActivity()).getMenu().findItem(R.id.item_load_calc).isVisible())
+            ((MainActivity) getActivity()).getMenu().findItem(R.id.item_load_calc).setVisible(true);
+
+        Snackbar.make(getActivity().getWindow().getDecorView(),
+                "계산 결과가 저장되었습니다.",
+                BaseTransientBottomBar.LENGTH_SHORT).show();
     }
 
     public void load() {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_calc_load, null);
+        ((TextView) view.findViewById(R.id.text_view_calc_load_result)).setText(result);
+        ((TextView) view.findViewById(R.id.text_view_calc_load_expr)).setText(expr);
+        if (alertDialog == null)
+            alertDialog = new AlertDialog.Builder(getActivity())
+                    .setView(view)
+                    .setTitle("저장된 계산 결과")
+                    .setPositiveButton("확인", null)
+                    .create();
 
+        alertDialog.show();
+    }
+
+    public boolean isSaved() {
+        return expr != null && result != null;
     }
 }
