@@ -3,6 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/item_load_calc"
+        android:icon="@drawable/ic_baseline_unarchive_24"
+        android:title="계산 결과 불러오기"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_save_calc"
+        android:icon="@drawable/ic_baseline_archive_24"
+        android:title="계산 결과 저장"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/item_add_post"
         android:icon="@drawable/ic_baseline_add_24"
         android:title="새 게시글 추가"
