@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.example.bcsd5.board.AddPostActivity;
 import com.example.bcsd5.board.BoardFragment;
 import com.example.bcsd5.board.BoardItemData;
+import com.example.bcsd5.calculator.CalcFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
